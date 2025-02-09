@@ -1,7 +1,16 @@
 package com.spring.security.persistence.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+import java.util.Set;
+import java.util.HashSet;
+
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -9,32 +18,23 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false,unique = true)
+    @Column(unique = true)
     private String username;
-    @Column(nullable = false)
     private String password;
 
-    public Long getId() {
-        return id;
-    }
+    @Column(name = "is_enabled")
+    private boolean isEnabled;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Column(name = "account_No_Expired")
+    private boolean accountNoExpired;
 
-    public String getUsername() {
-        return username;
-    }
+    @Column(name = "account_No_Locked")
+    private boolean accountNoLocked;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    @Column(name = "credential_No_Expired")
+    private boolean credentialNoExpired;
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 }
