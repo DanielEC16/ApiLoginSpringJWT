@@ -1,10 +1,10 @@
 package com.spring.security;
 
-import com.spring.security.persistence.entities.Permisos;
-import com.spring.security.persistence.entities.Role;
-import com.spring.security.persistence.entities.RoleEnum;
-import com.spring.security.persistence.entities.User;
-import com.spring.security.persistence.repositories.UserRepo;
+import com.spring.security.persistence.entity.PermissionEntity;
+import com.spring.security.persistence.entity.RoleEntity;
+import com.spring.security.persistence.entity.RoleEnum;
+import com.spring.security.persistence.entity.UserEntity;
+import com.spring.security.persistence.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,54 +21,54 @@ public class SecurityApplication {
     }
 
     @Bean
-    CommandLineRunner init(UserRepo userRepo){
+    CommandLineRunner init(UserRepository userRepo){
         return args -> {
             /* Create PERMISSIONS */
-            Permisos createPermission = Permisos.builder()
+            PermissionEntity createPermission = PermissionEntity.builder()
                     .name("CREATE")
                     .build();
 
-            Permisos readPermission = Permisos.builder()
+            PermissionEntity readPermission = PermissionEntity.builder()
                     .name("READ")
                     .build();
 
-            Permisos updatePermission = Permisos.builder()
+            PermissionEntity updatePermission = PermissionEntity.builder()
                     .name("UPDATE")
                     .build();
 
-            Permisos deletePermission = Permisos.builder()
+            PermissionEntity deletePermission = PermissionEntity.builder()
                     .name("DELETE")
                     .build();
 
-            Permisos refactorPermission = Permisos.builder()
+            PermissionEntity refactorPermission = PermissionEntity.builder()
                     .name("REFACTOR")
                     .build();
 
             /* Create ROLES */
-            Role roleAdmin = Role.builder()
+            RoleEntity roleAdmin = RoleEntity.builder()
                     .roleEnum(RoleEnum.ADMIN)
                     .permissionList(Set.of(createPermission, readPermission, updatePermission, deletePermission))
                     .build();
 
-            Role roleUser = Role.builder()
+            RoleEntity roleUser = RoleEntity.builder()
                     .roleEnum(RoleEnum.USER)
                     .permissionList(Set.of(createPermission, readPermission))
                     .build();
 
-            Role roleInvited = Role.builder()
+            RoleEntity roleInvited = RoleEntity.builder()
                     .roleEnum(RoleEnum.INVITED)
                     .permissionList(Set.of(readPermission))
                     .build();
 
-            Role roleDeveloper = Role.builder()
+            RoleEntity roleDeveloper = RoleEntity.builder()
                     .roleEnum(RoleEnum.DEVELOPER)
                     .permissionList(Set.of(createPermission, readPermission, updatePermission, deletePermission, refactorPermission))
                     .build();
 
             /* CREATE USERS */
-            User userSantiago = User.builder()
+            UserEntity userSantiago = UserEntity.builder()
                     .username("santiago")
-                    .password("1234")
+                    .password("$2a$10$cMY29RPYoIHMJSuwRfoD3eQxU1J5Rww4VnNOUOAEPqCBshkNfrEf6")
                     .isEnabled(true)
                     .accountNoExpired(true)
                     .accountNoLocked(true)
@@ -76,9 +76,9 @@ public class SecurityApplication {
                     .roles(Set.of(roleAdmin))
                     .build();
 
-            User userDaniel = User.builder()
+            UserEntity userDaniel = UserEntity.builder()
                     .username("daniel")
-                    .password("1234")
+                    .password("$2a$10$cMY29RPYoIHMJSuwRfoD3eQxU1J5Rww4VnNOUOAEPqCBshkNfrEf6")
                     .isEnabled(true)
                     .accountNoExpired(true)
                     .accountNoLocked(true)
@@ -86,9 +86,9 @@ public class SecurityApplication {
                     .roles(Set.of(roleUser))
                     .build();
 
-            User userAndrea = User.builder()
+            UserEntity userAndrea = UserEntity.builder()
                     .username("andrea")
-                    .password("1234")
+                    .password("$2a$10$cMY29RPYoIHMJSuwRfoD3eQxU1J5Rww4VnNOUOAEPqCBshkNfrEf6")
                     .isEnabled(true)
                     .accountNoExpired(true)
                     .accountNoLocked(true)
@@ -96,9 +96,9 @@ public class SecurityApplication {
                     .roles(Set.of(roleInvited))
                     .build();
 
-            User userAnyi = User.builder()
+            UserEntity userAnyi = UserEntity.builder()
                     .username("anyi")
-                    .password("1234")
+                    .password("$2a$10$cMY29RPYoIHMJSuwRfoD3eQxU1J5Rww4VnNOUOAEPqCBshkNfrEf6")
                     .isEnabled(true)
                     .accountNoExpired(true)
                     .accountNoLocked(true)

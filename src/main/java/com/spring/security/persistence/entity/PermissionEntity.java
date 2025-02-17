@@ -1,6 +1,5 @@
-package com.spring.security.persistence.entities;
+package com.spring.security.persistence.entity;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(name="permissions")
-public class Permisos {
+public class PermissionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
