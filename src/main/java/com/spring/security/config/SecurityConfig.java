@@ -36,7 +36,7 @@ public class SecurityConfig {
                     // Cofnigurar los endpoints privados
                     http.requestMatchers(HttpMethod.POST, "/auth/post").hasAnyRole("ADMIN", "DEVELOPER");
                     http.requestMatchers(HttpMethod.PATCH, "/auth/patch").hasAnyAuthority("REFACTOR");
-
+                    http.requestMatchers(HttpMethod.DELETE,"/auth/delete").hasAnyAuthority("DELETE");
                     // Configurar el resto de endpoint - NO ESPECIFICADOS
                     http.anyRequest().denyAll();
                 })

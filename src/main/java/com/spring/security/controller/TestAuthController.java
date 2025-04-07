@@ -8,7 +8,7 @@ public class TestAuthController {
 
     @GetMapping("/get")
     public String helloGet(){
-        return "Hello World - GET";
+        return "Hello Wo - GET";
     }
 
     @PostMapping("/post")
